@@ -8,7 +8,7 @@ it save encoding of every person separately so that it can be used later.
 First install dependencies:
 
 ```
-install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 then run main.py
