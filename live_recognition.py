@@ -34,7 +34,7 @@ def start_live():
 			for face_encoding in face_encodings:
 
 				for name, encodings in known_face_encodings.items():
-					matches = face_recognition.compare_faces(encodings, face_encoding)
+					matches = face_recognition.compare_faces(encodings, face_encoding, tolerance=0.5)
 					print(name + str(matches))
 					if all(matches):
 						face_names.append(name)
@@ -51,16 +51,17 @@ def start_live():
 			left *= 4
 
 			# Draw a box around the face
-			cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
+			cv2.rectangle(frame, (left, top), (right, bottom), (0, 255, 0), 2)
 
 			# Draw a label with a name below the face
-			cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
+			cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 255, 0), cv2.FILLED)
 			font = cv2.FONT_HERSHEY_DUPLEX
 			cv2.putText(frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
 
 		# Display the resulting image
 		cv2.imshow('Video', frame)
 
+		k = cv2.waitKey(1)
 		# Hit 'ESC' on the keyboard to quit!
 		if k%256 == 27:
 			# ESC pressed
